@@ -1,1 +1,0 @@
-# Pika-Sayuru
