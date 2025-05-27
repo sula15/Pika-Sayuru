@@ -6,7 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import PikaIcon from './PikaIcon';
 import MascotGif from '../assets/Mascot.gif';
 import { useAppStore } from '../store';
-
+import { getFlutterBlocksInfo } from './blocks/customBlocks/flutterBlock.js';
+import { getFlutterGeneratorsInfo } from './blocks/customBlocks/flutterGenerator.js';
 
 const PikaMascot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +50,10 @@ const PikaMascot = () => {
         hasCode: !!dartCode && dartCode.trim().length > 0
       };
 
+      // Get Flutter blocks and generators info
+      const flutterBlocksInfo = getFlutterBlocksInfo();
+      const flutterGeneratorsInfo = getFlutterGeneratorsInfo();
+
       // Create a comprehensive prompt with context
       const prompt = `You are Pika, a friendly and helpful AI assistant for Miniblocks - a visual mobile app development platform similar to MIT App Inventor but for Flutter apps.
 
@@ -75,6 +80,18 @@ PLATFORM FEATURES YOU CAN HELP WITH:
    - Debug mode shows generated Dart code
    - Advanced mode enables Flutter-specific blocks
 
+AVAILABLE FLUTTER BLOCKS (Advanced Mode):
+${JSON.stringify(flutterBlocksInfo.availableBlocks, null, 2)}
+
+FLUTTER BLOCK CATEGORIES:
+${JSON.stringify(flutterBlocksInfo.categories, null, 2)}
+
+FLUTTER CODE GENERATION EXAMPLES:
+${JSON.stringify(flutterGeneratorsInfo.codeExamples, null, 2)}
+
+COMMON FLUTTER PATTERNS:
+${JSON.stringify(flutterGeneratorsInfo.commonPatterns, null, 2)}
+
 3. **Project Management**:
    - Create/manage multiple projects
    - Multiple screens per project
@@ -100,10 +117,12 @@ PERSONALITY:
 - Reference the user's current context when relevant
 - Keep responses concise but helpful
 - If unsure about something specific, acknowledge it and offer general guidance
+- When helping with Flutter blocks, provide specific block names and explain how to connect them
+- If user asks about Flutter widgets, explain both the visual block and the generated Dart code
 
 USER QUESTION: ${userMessage}
 
-Please provide a helpful response as Pika, considering the user's current context and the platform's capabilities. If they're asking about something not directly related to Miniblocks, still try to be helpful but gently guide them back to app development topics.`;
+Please provide a helpful response as Pika, considering the user's current context and the platform's capabilities. If they're asking about Flutter blocks or widgets, reference the specific blocks available and show how they generate Dart code. If they're asking about something not directly related to Miniblocks, still try to be helpful but gently guide them back to app development topics.`;
 
       const result = await model.generateContent(prompt);
       const response = result.response;

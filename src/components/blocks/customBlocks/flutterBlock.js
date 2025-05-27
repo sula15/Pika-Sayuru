@@ -1,76 +1,6 @@
 import * as Blockly from "blockly";
 
-// TODO: Deprecated blocks, remove in future versions
-// Blockly.Blocks['flutter_import_material'] = {
-//     init: function() {
-//         this.appendDummyInput()
-//             .appendField("import 'package:flutter/material.dart';");
-//         this.setOutput(true, "Import");
-//         this.setPreviousStatement(false, null);
-//         this.setNextStatement(false, null);
-//         this.setColour(510);
-//         this.setTooltip("Import Flutter Material package");
-//         this.setHelpUrl("https://api.flutter.dev/flutter/material/material-library.html");
-//     }
-// };
-// Blockly.Blocks['flutter_main'] = {
-//     init() {
-//         this.appendDummyInput().appendField("main()");
-//         this.appendStatementInput("body")
-//             .setCheck(null)
-//             .appendField("body");
-//         this.setColour(290);
-//         this.setTooltip("Dart entry point");
-//         this.setHelpUrl("https://dart.dev/guides/language/language-tour#functions");
-//     }
-// };
-// Blockly.Blocks['runApp'] = {
-//     init: function() {
-//         this.appendValueInput("NAME")
-//             .setCheck("Widget")
-//             .appendField("RunApp");
-//         this.setColour(230);
-//         this.setPreviousStatement(true, null);
-//         this.setNextStatement(false, null);
-//         this.setTooltip("");
-//         this.setHelpUrl("https://api.flutter.dev/flutter/widgets/runApp.html");
-//     }
-// };
-// Blockly.Blocks['app'] = {
-//     init: function() {
-//         this.appendDummyInput()
-//             .appendField("App of type")
-//             .appendField(new Blockly.FieldDropdown([["material","MATERIAL"], ["cupertino","CUPERTINO"]]), "type");
-//         this.appendValueInput("title")
-//             .setCheck("String")
-//             .setAlign(Blockly.ALIGN_RIGHT)
-//             .appendField("title");
-//         this.appendValueInput("home")
-//             .setCheck(null)
-//             .setAlign(Blockly.ALIGN_RIGHT)
-//             .appendField("home");
-//         this.setOutput(true, ["Widget", "MaterialApp"]);
-//         this.setColour(230);
-//         this.setTooltip("");
-//         this.setHelpUrl("https://api.flutter.dev/flutter/material/MaterialApp-class.html");
-//     }
-// };
-//
-// -- STATELESS WIDGET BLOCK --
-// Blockly.Blocks['flutter_stateless_widget'] = {
-//     init: function() {
-//         this.appendDummyInput()
-//             .appendField(new Blockly.FieldTextInput("MyWidget"), "classname")
-//             .appendField("StatelessWidget");
-//         this.appendValueInput("content")
-//             .setCheck("Widget")
-//             .appendField("build(BuildContext context)");
-//         this.setColour(120);
-//         this.setTooltip("");
-//         this.setHelpUrl("https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html");
-//     }
-// };
-
+// All existing block definitions
 Blockly.Blocks['flutter_center'] = {
     init() {
         this.appendValueInput("child")
@@ -116,7 +46,6 @@ Blockly.Blocks['appBar'] = {
             .appendField("title").setCheck("flutter_text");
         this.setOutput(true, ["Widget", "AppBar"]);
         this.setColour(165);
-
         this.setTooltip("");
         this.setHelpUrl("https://api.flutter.dev/flutter/material/AppBar-class.html");
     }
@@ -175,7 +104,6 @@ Blockly.Blocks['flutter_listview'] = {
         this.setHelpUrl("https://api.flutter.dev/flutter/widgets/ListView-class.html");
     }
 };
-
 
 Blockly.Blocks['flutter_icon'] = {
     init: function() {
@@ -263,7 +191,6 @@ Blockly.Blocks['flutter_fab'] = {
     }
 };
 
-
 Blockly.Blocks['flutter_stateful_widget'] = {
     init: function() {
         this.appendDummyInput()
@@ -280,7 +207,6 @@ Blockly.Blocks['flutter_stateful_widget'] = {
     }
 };
 
-
 Blockly.Blocks['flutter_create_instance'] = {
     init: function() {
         this.appendDummyInput()
@@ -292,7 +218,6 @@ Blockly.Blocks['flutter_create_instance'] = {
         this.setHelpUrl("");
     }
 };
-
 
 Blockly.Blocks['flutter_container'] = {
     init: function() {
@@ -316,7 +241,6 @@ Blockly.Blocks['flutter_container'] = {
         this.setHelpUrl("https://api.flutter.dev/flutter/widgets/Container/Container.html");
     }
 };
-
 
 Blockly.Blocks['flutter_set_state_call'] = {
     init: function() {
@@ -358,3 +282,106 @@ Blockly.Blocks['flutter_raw_statement'] = {
     }
 };
 
+// Export function for LLM context
+export const getFlutterBlocksInfo = () => {
+    return {
+        availableBlocks: [
+            {
+                name: "flutter_center", 
+                description: "Centers its child widget in the available space",
+                inputs: ["child (Widget)"],
+                output: "Center Widget",
+                category: "Layout"
+            },
+            {
+                name: "scaffold", 
+                description: "Provides basic material design visual layout structure with appBar, body, and floating action button",
+                inputs: ["appBar (AppBar)", "body (Widget)", "fab (FloatingActionButton)"],
+                output: "Scaffold Widget",
+                category: "Structure"
+            },
+            {
+                name: "appBar", 
+                description: "Top navigation bar that appears at the top of a Scaffold",
+                inputs: ["title (Text Widget)"],
+                output: "AppBar Widget",
+                category: "Structure"
+            },
+            {
+                name: "flutter_text", 
+                description: "Displays a string of text with single style",
+                inputs: ["data (String)"],
+                output: "Text Widget",
+                category: "Basic"
+            },
+            {
+                name: "flutter_row", 
+                description: "Displays its children in a horizontal array",
+                inputs: ["children (List of Widgets)"],
+                output: "Row Widget",
+                category: "Layout"
+            },
+            {
+                name: "flutter_column", 
+                description: "Displays its children in a vertical array",
+                inputs: ["children (List of Widgets)"],
+                output: "Column Widget",
+                category: "Layout"
+            },
+            {
+                name: "flutter_container", 
+                description: "A convenience widget that combines common painting, positioning, and sizing widgets",
+                inputs: ["width (Number)", "height (Number)", "color (Color)", "child (Widget)"],
+                output: "Container Widget",
+                category: "Layout"
+            },
+            {
+                name: "flutter_stateful_widget", 
+                description: "Creates a widget that can hold mutable state and rebuild when the state changes",
+                inputs: ["classname (String)", "Variables (Statements)", "content (Widget)"],
+                output: "StatefulWidget",
+                category: "Structure"
+            },
+            {
+                name: "flutter_raised_button", 
+                description: "A material design raised button (deprecated, use ElevatedButton instead)",
+                inputs: ["onPressed (Function)", "child (Widget)"],
+                output: "RaisedButton Widget",
+                category: "Interactive"
+            },
+            {
+                name: "flutter_fab", 
+                description: "A circular icon button that hovers over content to promote a primary action",
+                inputs: ["onPressed (Function)", "child (Widget)"],
+                output: "FloatingActionButton Widget",
+                category: "Interactive"
+            },
+            {
+                name: "flutter_icon", 
+                description: "A graphical icon widget drawn with a glyph from a font",
+                inputs: ["icon (IconData)", "color (Color)", "size (Number)"],
+                output: "Icon Widget",
+                category: "Basic"
+            },
+            {
+                name: "flutter_listview", 
+                description: "A scrollable list of widgets arranged linearly",
+                inputs: ["children (List of Widgets)"],
+                output: "ListView Widget",
+                category: "Layout"
+            }
+        ],
+        categories: {
+            "Structure": ["scaffold", "appBar", "flutter_stateful_widget"],
+            "Layout": ["flutter_center", "flutter_row", "flutter_column", "flutter_container", "flutter_listview"],
+            "Basic": ["flutter_text", "flutter_icon"],
+            "Interactive": ["flutter_raised_button", "flutter_fab"]
+        },
+        usage: {
+            basicApp: "Start with Scaffold → add AppBar and body → add content widgets",
+            layout: "Use Row/Column for linear layouts, Container for styling, Center for centering",
+            interaction: "Use buttons (RaisedButton/FAB) for user actions with onPressed events",
+            state: "Use StatefulWidget when you need to update UI based on changing data"
+        }
+    };
+};
